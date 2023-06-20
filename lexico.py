@@ -6,18 +6,24 @@ palavras_reservadas = ['program', 'if', 'then', 'else', 'while', 'double', 'unti
 def lexico():  
     arquivo = open('texto.txt')
     texto = arquivo.read()
-    global cadeia, estado
+    global cadeia, estado,linha
 
     i = 0
+    linha = 0
     zeraEstadoeCadeia() 
 
     while i <= len(texto):
 
+         
         # se for o ultimo caractere do arquivo
         if i == len(texto):
           if(cadeia != ""):
             tokenIsValido()
           break
+
+        # if texto[i] == '\n':
+        #   linha+=1 
+       
       
 
 ####################### estado 0 ####################################
@@ -53,7 +59,6 @@ def lexico():
             mudaEstado(16,texto[i])
             i+=1
           elif texto[i] == ' ' or texto[i] == '\n':
-            
             i+=1
           else:
             cadeia = texto[i]
@@ -117,8 +122,7 @@ def lexico():
             zeraEstadoeCadeia()
             
 # ####################### estado 5 e 6 e 15####################################
-        elif estado == 5 or estado == 6 or estado == 15 or estado == 8:
-            
+        elif estado == 5 or estado == 6 or estado == 15 or estado == 8:  
             tokenIsValido()
             zeraEstadoeCadeia()
 
@@ -291,8 +295,9 @@ def tokenIsValido():
     elif(estado == 15 or estado == 20 or estado == 24):
       pass     
     else:
-      print(f'[ [ERRO] {cadeia} -> Token inválido]')
+      print(f'[ [ERRO] na linha : {linha}] ]')
+      print(f'[ [ERRO] {cadeia} -> Token inválido] ]')
            
 lexico()
-
+# Verificar o erro no comentario e printar 
 

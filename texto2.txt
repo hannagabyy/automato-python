@@ -1,8 +1,7 @@
-if teste{
-    a-a-teste333
-    -14.6 
-    -=;
-    +=
+program teste{
+    a-a-1,23 
+    -=for.
+    +=(--)
     @@aaaaaa
 //
 aaaaa
@@ -11,7 +10,7 @@ aaaaa
 aaa
 
 }
-k_fazz4-:c ,
+aaa-:c ,
 
 
 
@@ -21,10 +20,10 @@ oenceiwpe    ++++
 
 @@aaaa@@
 
-
+****
+@@&
 @@2abc_8
 aaaa begin end
 -5,54,9a9
 /*aaaaa
 :=
-*/

@@ -4,7 +4,7 @@ palavras_reservadas = ['program', 'if', 'then', 'else', 'while', 'double', 'unti
                            'end', 'procedure', 'function', 'for', 'begin']
 
 def lexico():  
-    arquivo = open('texto.txt')
+    arquivo = open('teste.txt')
     texto = arquivo.read()
     global cadeia, estado,linha
 
@@ -21,8 +21,9 @@ def lexico():
             tokenIsValido()
           break
 
-        # if texto[i] == '\n':
-        #   linha+=1 
+        if texto[i] == '\n':
+          linha+=1 
+          # print(f'incrementando linha={linha}')
        
       
 
@@ -60,9 +61,9 @@ def lexico():
             i+=1
           elif texto[i] == ' ' or texto[i] == '\n':
             i+=1
-          else:
-            cadeia = texto[i]
             
+          else:
+            cadeia = texto[i]    
             tokenIsValido()
             break
             # i+=1
@@ -80,7 +81,7 @@ def lexico():
             i+=1
             # print(cadeia)
           else:    
-            i+=1     
+              
             tokenIsValido()
             zeraEstadoeCadeia()      
             

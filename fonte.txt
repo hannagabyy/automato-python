@@ -1,0 +1,26 @@
+
+
+teste123    5
+t_este
+---4
+// comentario
+sem final
+@@2abc_8
+-5,54
+/*comentario de Multiplas
+ linhas 2
+:=
+*/
+if teste{
+    b-b123 += begin
+    -2 -= 4,9
+//
+Este é
+Um comentario 
+
+//
+:=
+}
+h_anna    ++ + -
+
+

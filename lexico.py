@@ -4,7 +4,7 @@ palavras_reservadas = ['program', 'if', 'then', 'else', 'while', 'double', 'unti
                            'end', 'procedure', 'function', 'for', 'begin']
 
 def lexico():  
-    arquivo = open('teste.txt')
+    arquivo = open('fonte.txt')
     texto = arquivo.read()
     global cadeia, estado,linha
 
@@ -20,36 +20,25 @@ def lexico():
           if(cadeia != ""):
             tokenIsValido()
           break
-
-        if texto[i] == '\n':
-          linha+=1 
-          # print(f'incrementando linha={linha}')
-       
-      
+   
 
 ####################### estado 0 ####################################
         if estado == 0:
           if re.search(r"[a-z]", texto[i]) is not None :
             mudaEstado(1, texto[i])
             i+=1
-            
-            # print(cadeia)
           elif texto[i] in '>:+': 
             mudaEstado(4, texto[i])
             i+=1
           elif texto[i] == '-':
             mudaEstado(12,texto[i])
-            i+=1  
-            # print(cadeia)
-
+            i+=1 
           elif texto[i] in (';,.*(){}='):
             mudaEstado(6, texto[i])
             i+=1
-            
           elif texto[i] == '<':
             mudaEstado(7, texto[i])
             i+=1
-
           elif texto[i].isdigit():
             mudaEstado(9, texto[i])
             i+=1
@@ -60,28 +49,22 @@ def lexico():
             mudaEstado(16,texto[i])
             i+=1
           elif texto[i] == ' ' or texto[i] == '\n':
-            i+=1
-            
+            i+=1    
           else:
             cadeia = texto[i]    
             tokenIsValido()
             break
-            # i+=1
-            # print(f'[ [ERRO] {cadeia} ->  token inválido]')
-            # break 
+            
 
 ####################### estado 1 ####################################
         elif estado == 1:
           if texto[i] == '_' or texto[i] == '-':
             mudaEstado(2, texto[i])
             i+=1
-            # print(cadeia)
           elif re.search(r"[a-z]", texto[i]) is not None or texto[i].isdigit():
             mudaEstado(3, texto[i])
             i+=1
-            # print(cadeia)
           else:    
-              
             tokenIsValido()
             zeraEstadoeCadeia()      
             
@@ -90,35 +73,25 @@ def lexico():
             if re.search(r"[a-z]", texto[i]) is not None or texto[i].isdigit():
                 mudaEstado(3, texto[i])
                 i+=1
-            # print(cadeia)
             else:
-            # texto[i]isvalido()
-              
               tokenIsValido()
-              zeraEstadoeCadeia()
-                
-                
+              zeraEstadoeCadeia()                
 
 ####################### estado 3 ####################################                  
         elif estado == 3:
             if re.search(r"[a-z]", texto[i]) is not None or texto[i].isdigit():
                 mudaEstado(3, texto[i])
                 i+=1
-            # print(cadeia)
             else:
-            
               tokenIsValido()
               zeraEstadoeCadeia()
-              
-                                
+                                       
 ######################## estado 4 ####################################
         elif estado == 4:
           if texto[i] == '=':
             mudaEstado(5, texto[i])
             i+=1
-            # print(cadeia)
           else:
-            
             tokenIsValido()
             zeraEstadoeCadeia()
             
@@ -132,8 +105,7 @@ def lexico():
           if texto[i] == '>' or texto[i] == '=':
             mudaEstado(8, texto[i])
             i+=1
-          else:
-            
+          else:        
             tokenIsValido()
             zeraEstadoeCadeia()
 
@@ -145,21 +117,19 @@ def lexico():
           elif texto[i].isdigit():
             mudaEstado(9,texto[i])
             i+=1
-          else:
-            
+          else:  
             tokenIsValido()
             zeraEstadoeCadeia()
             
 ####################### estado 10 ####################################
         elif estado == 10:
             if texto[i].isdigit():
-                mudaEstado(11, texto[i])
-                i+=1
+              mudaEstado(11, texto[i])
+              i+=1
             else:
-                # tokenIsValido()
-                zeraEstadoeCadeia()
+              tokenIsValido()
+              zeraEstadoeCadeia()
                                 
-
 # ####################### estado 11 ####################################              
         elif estado == 11:
           if texto[i].isdigit():
@@ -186,8 +156,7 @@ def lexico():
           if texto[i] == '@':
             mudaEstado(14, texto[i])
             i+=1
-          else:
-            
+          else:       
             tokenIsValido()
             zeraEstadoeCadeia()
                  
@@ -198,27 +167,23 @@ def lexico():
           else:
             mudaEstado(14, texto[i])
             i+=1         
-
-                          
+                       
 # ####################### estado 16 ####################################              
         elif estado == 16:
           if texto[i] == '/':
             mudaEstado(17, texto[i])
             i=i+1 
-
           elif texto[i] == '*':
             mudaEstado(21, texto[i])
             i=i+1                  
-          else:
-            
+          else:          
             tokenIsValido() 
             zeraEstadoeCadeia()
             
 # # ####################### estado 17 ####################################              
         elif estado == 17:
           mudaEstado(18, texto[i])
-          i = i+1 
-           
+          i = i+1         
 
 # # ####################### estado 18 ####################################              
         elif estado ==18:
@@ -274,7 +239,7 @@ def notComentario(estado):
     return True
   
 
-def zeraEstadoeCadeia():#zera estado e cadeia
+def zeraEstadoeCadeia():
   global estado, cadeia
   estado = 0
   cadeia = ""
@@ -296,9 +261,7 @@ def tokenIsValido():
     elif(estado == 15 or estado == 20 or estado == 24):
       pass     
     else:
-      print(f'[ [ERRO] na linha : {linha}] ]')
       print(f'[ [ERRO] {cadeia} -> Token inválido] ]')
+      exit()
            
 lexico()
-# Verificar o erro no comentario e printar 
-
